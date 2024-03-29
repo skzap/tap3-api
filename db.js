@@ -19,7 +19,7 @@ let db = {
         console.log('PostgreSQL ready')
     },
     query: async (q) => {
-        console.log('DB: ' + q)
+        // console.log('DB: ' + q)
         return (await db.client.query(q)).rows
     },
     end: async () => {
