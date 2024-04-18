@@ -3,6 +3,7 @@ import * as serveHttp from 'http'
 import db from './db.js'
 import cors from 'cors'
 import config from './config.js'
+import { prices } from './prices.js'
 
 const http_port = config.http.port
 const http_host = config.http.host
@@ -26,6 +27,19 @@ export default () => {
       let query = `SELECT id_model, css, svg from catalogue WHERE id = ${cardId}`
       let qRes = await db.query(query)
       res.status(200).send(qRes)
+    })
+
+    app.get('/price/:symbol', async (req, res) => {
+      if (!req.params.symbol) {
+        fourOhFour(res)
+        return
+      }
+      let symbol = req.params.symbol.toUpperCase()
+      if (!prices[symbol]) {
+        fourOhFour(res)
+        return
+      }
+      res.status(200).send({usd: prices[symbol]})
     })
 
     app.get('*', function (req, res) {
