@@ -1,7 +1,7 @@
 import { ethers } from "ethers"
 import db from './db.js'
 
-const provider = new ethers.JsonRpcProvider("https://polygon.llamarpc.com")
+const provider = new ethers.JsonRpcProvider("https://rpc.ankr.com/polygon")
 
 let tracker = {
   updateTxCountRandom: async () => {
@@ -12,7 +12,7 @@ let tracker = {
       console.log('TXCOUNT\t'+pub+'\t'+count)
       await db.query(`UPDATE catalogue SET tx_count = ${count} WHERE pub = '${pub}'`)
     } catch (error) {
-      console.log('TXCOUNT ERROR')
+      console.log('TXCOUNT ERROR', error)
     }
   }
 }
