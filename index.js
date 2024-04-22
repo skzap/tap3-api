@@ -16,10 +16,10 @@ async function main() {
   // refresh matic price
   setInterval(async () => {
     await refreshPrice()
-  }, config.intervals.tracker)
+  }, config.intervals.prices)
 
   // randomly track users tx count
   setInterval(async () => {
     await tracker.updateTxCountRandom()
-  }, config.intervals.prices)
+  }, config.intervals.tracker)
 }
